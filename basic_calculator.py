@@ -1,29 +1,39 @@
-# Basic Calculator Program
+# Basic Calculator using Function Mapping
 
-# Ask the user to input the first number
-num1 = float(input("Enter the first number: "))
+# Step 1: Define operation functions
+def add(a, b):
+    return a + b
 
-# Ask the user to input the second number
-num2 = float(input("Enter the second number: "))
+def subtract(a, b):
+    return a - b
 
-# Ask the user to input the operation
-operation = input("Enter the operation (+, -, *, /): ")
+def multiply(a, b):
+    return a * b
 
-# Perform the operation
-if operation == "+":
-    result = num1 + num2
-    print(f"{num1} + {num2} = {result}")
-elif operation == "-":
-    result = num1 - num2
-    print(f"{num1} - {num2} = {result}")
-elif operation == "*":
-    result = num1 * num2
-    print(f"{num1} * {num2} = {result}")
-elif operation == "/":
-    if num2 != 0:
-        result = num1 / num2
-        print(f"{num1} / {num2} = {result}")
+def divide(a, b):
+    if b == 0:
+        return "Error: Cannot divide by zero."
+    return a / b
+
+# Step 2: Map operations to functions
+operations = {
+    "+": add,
+    "-": subtract,
+    "*": multiply,
+    "/": divide
+}
+
+# Step 3: Get user input
+try:
+    num1 = float(input("Enter the first number: "))
+    num2 = float(input("Enter the second number: "))
+    op = input("Enter the operation (+, -, *, /): ")
+
+    # Step 4: Perform the operation
+    if op in operations:
+        result = operations[op](num1, num2)
+        print(f"{num1} {op} {num2} = {result}")
     else:
-        print("Error: Cannot divide by zero.")
-else:
-    print("Invalid operation entered. Please use +, -, *, or /.")
+        print("Invalid operation. Please use +, -, *, or /.")
+except ValueError:
+    print("Invalid input. Please enter numeric values.")
